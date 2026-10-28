@@ -10,7 +10,7 @@ layout: null
   <style>
     body {
       background: #a4d5bd;
-  ek   color: #626063;
+      color: #626063;
       font-family: sans-serif;
       font-size: 13px;
       line-height: 2;
@@ -30,6 +30,33 @@ layout: null
     h2 { font-size: 16px; }
     time { font-size: 11px; }
     .body { overflow-wrap: anywhere; }
+
+    /* 文字と枠線を統一 */
+body, h1, h2, p, time {
+color: #626063;
+}
+
+header, article {
+border-color: #626063;
+}
+
+/* 行間を少し詰める */
+body {
+line-height: 1.8;
+}
+
+/* 段落間の余白を調整 */
+.body p {
+margin: 0 0 0.8em;
+}
+
+/* 見出しの余白も調整 */
+h1, h2 {
+line-height: 1.5;
+margin-top: 0.5em;
+margin-bottom: 0.8em;
+}
+    
   </style>
 </head>
 <body>
