@@ -1,6 +1,6 @@
-title: エッセイ置き場
-description: 日々のこと、思ったこと。
-timezone: Japan
+title: よもくれよもよも
+description: 文章置き場
+timezone: JST
 markdown: kramdown
 
 plugins:
