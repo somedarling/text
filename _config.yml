@@ -1,5 +1,10 @@
-
 title: エッセイ置き場
 description: 日々のこと、思ったこと。
 timezone: Japan
 markdown: kramdown
+
+plugins:
+  - jekyll-paginate
+
+paginate: 5
+paginate_path: "/page:num/"
