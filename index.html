@@ -1,0 +1,52 @@
+
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>エッセイ置き場</title>
+  <style>
+    body {
+      background: #a4d5bd;
+      color: #626063;
+      font-family: sans-serif;
+      font-size: 13px;
+      line-height: 2;
+      margin: 0;
+      padding: 30px 15px;
+    }
+    header, article {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #f6e5cc;
+      border: 3px solid #626063;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    header { text-align: center; }
+    h1 { font-size: 18px; }
+    h2 { font-size: 16px; }
+    time { font-size: 11px; }
+    .body { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>エッセイ置き場</h1>
+    <p>日々のこと、思ったこと。</p>
+  </header>
+
+  {% for post in site.posts %}
+  <article>
+    <time>{{ post.date | date: "%Y.%m.%d" }}</time>
+    <h2>{{ post.title | escape }}</h2>
+    <div class="body">
+      {{ post.content }}
+    </div>
+  </article>
+  {% endfor %}
+</body>
+</html>
