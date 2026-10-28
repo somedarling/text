@@ -2,8 +2,8 @@ media: media
 
 content:
 - name: posts
-label: エッセイ
-type: collection
+    label: エッセイ
+    type: collection
 path: _posts
 format: yaml-frontmatter
 filename: "{year}-{month}-{day}-{hour}-{minute}-{second}.md"
