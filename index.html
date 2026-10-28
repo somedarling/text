@@ -6,7 +6,7 @@ layout: null
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>エッセイ置き場</title>
+  <title>文字置き場</title>
   <style>
     body {
       background: #a4d5bd;
@@ -56,12 +56,27 @@ line-height: 1.5;
 margin-top: 0.5em;
 margin-bottom: 0.8em;
 }
+
+    /* 本文の行間 */
+.body {
+line-height: 1.6;
+}
+
+/* 段落と段落の間隔 */
+.body p {
+margin: 0 0 0.35em;
+}
+
+/* 最後の段落の余白をなくす */
+.body p:last-child {
+margin-bottom: 0;
+}
     
   </style>
 </head>
 <body>
   <header>
-    <h1>エッセイ置き場</h1>
+    <h1>文章置き場</h1>
     <p>日々のこと、思ったこと。</p>
   </header>
 
