@@ -98,7 +98,7 @@ color: #b47765;
     <p>文章置き場</p>
   </header>
 
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}
   <article>
     <time>{{ post.date | date: "%Y.%m.%d" }}</time>
     <h2>{{ post.title | escape }}</h2>
@@ -107,5 +107,23 @@ color: #b47765;
     </div>
   </article>
   {% endfor %}
+
+  {% if paginator.total_pages > 1 %}
+  <nav style="text-align:center; margin:30px auto;">
+
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">← 新しい記事</a>
+    {% endif %}
+
+    <span style="margin:0 15px;">
+      {{ paginator.page }} / {{ paginator.total_pages }}
+    </span>
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">古い記事 →</a>
+    {% endif %}
+
+  </nav>
+  {% endif %}
 </body>
 </html>
