@@ -100,7 +100,7 @@ color: #b47765;
 
   {% for post in paginator.posts %}
   <article>
-    <time>{{ post.date | date: "%Y.%m.%d" }}</time>
+    <time>{{ post.date | date: "%Y.%m.%d" %H:%M" }}</time>
     <h2>{{ post.title | escape }}</h2>
     <div class="body">
       {{ post.content }}
