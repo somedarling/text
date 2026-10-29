@@ -17,7 +17,6 @@ content:
         type: date
         options:
           time: true
-        readonly: true
       - name: body
         label: 本文
         type: rich-text
