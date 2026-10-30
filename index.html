@@ -90,12 +90,18 @@ a:hover,
 a:active {
 color: #b47765;
 }
+
+    header h1 a,
+header h1 a:visited {
+  color: inherit;
+  text-decoration: none;
+}
     
   </style>
 </head>
 <body>
   <header>
-    <h1>よもくれよもよも</h1>
+    <h1><a href="{{ '/' | relative_url }}">よもくれよもよも</a>a</h1>
     <p>文章置き場</p>
   </header>
 
