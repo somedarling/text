@@ -93,37 +93,38 @@ header h1 a:visited {
 }
 
     
-    .search-box {
-      max-width: 400px;
-      margin: 20px auto;
-      background: #f6e5cc;
-      border: 3px solid #626063;
-      border-radius: 5px;
-      padding: 20px;
-      box-sizing: content-box;
-    }
-    #search-input {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #626063;
-      border-radius: 4px;
-      background: #fffdf7;
-      color: #626063;
-      font: inherit;
-    }
-    #search-results {
-      margin-top: 12px;
-    }
-    .search-result {
-      border-top: 1px dashed #626063;
-      padding: 10px 0;
-    }
-    .search-result p {
-      margin: 4px 0;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
+
+.search-box {
+  max-width: 400px;
+  margin: 30px auto 10px;
+  padding: 10px 14px;
+  background: #f6e5cc;
+  border: 2px solid #626063;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#search-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #626063;
+  border-radius: 4px;
+  background: #fffdf7;
+  color: #626063;
+  font: inherit;
+}
+
+#search-results {
+  margin-top: 8px;
+}
+
+.search-result {
+  border-top: 1px dashed #626063;
+  padding: 6px 0;
+}
+
     
   </style>
 </head>
@@ -200,30 +201,19 @@ header h1 a:visited {
       count.textContent = matches.length + '件見つかりました';
       results.appendChild(count);
 
-      matches.forEach(post => {
-        const item = document.createElement('div');
-        item.className = 'search-result';
 
-        const link = document.createElement('a');
-        link.href = post.url;
-        link.textContent = post.title;
+matches.forEach(post => {
+  const item = document.createElement('div');
+  item.className = 'search-result';
 
-        const date = document.createElement('p');
-        date.textContent = post.date;
+  const link = document.createElement('a');
+  link.href = post.url;
+  link.textContent = post.title;
 
-        const excerpt = document.createElement('p');
-        const plain = post.content.replace(/\s+/g, ' ');
-        const pos = plain.toLowerCase()
-          .indexOf(keyword);
-        const start = Math.max(0, pos - 35);
-        excerpt.textContent =
-          (start > 0 ? '…' : '') +
-          plain.slice(start, start + 110) +
-          (start + 110 < plain.length ? '…' : '');
+  item.appendChild(link);
+  results.appendChild(item);
+});
 
-        item.append(link, date, excerpt);
-        results.appendChild(item);
-      });
     }
 
     input.addEventListener('input', search);
