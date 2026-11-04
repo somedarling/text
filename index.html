@@ -91,6 +91,39 @@ header h1 a:visited {
   color: inherit;
   text-decoration: none;
 }
+
+    
+    .search-box {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #f6e5cc;
+      border: 3px solid #626063;
+      border-radius: 5px;
+      padding: 20px;
+      box-sizing: content-box;
+    }
+    #search-input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #626063;
+      border-radius: 4px;
+      background: #fffdf7;
+      color: #626063;
+      font: inherit;
+    }
+    #search-results {
+      margin-top: 12px;
+    }
+    .search-result {
+      border-top: 1px dashed #626063;
+      padding: 10px 0;
+    }
+    .search-result p {
+      margin: 4px 0;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
     
   </style>
 </head>
@@ -98,6 +131,15 @@ header h1 a:visited {
   <header>
     <h1><a href="{{ '/' | relative_url }}">よもくれよもよも</a></h1>
     <p>文章置き場</p>
+    
+  <section class="search-box" role="search">
+    <label for="search-input">記事を検索</label>
+    <input id="search-input"
+           type="search"
+           placeholder="キーワードを入力">
+    <div id="search-results" aria-live="polite"></div>
+  </section>
+    
   </header>
 
   {% for post in paginator.posts %}
@@ -128,5 +170,82 @@ header h1 a:visited {
 
   </nav>
   {% endif %}
+  
+  <script>
+  (function () {
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    const searchUrl = {{ '/search.json' | relative_url | jsonify }};
+    let posts = [];
+
+    function message(text) {
+      results.textContent = text;
+    }
+
+    function search() {
+      const keyword = input.value.trim().toLowerCase();
+      results.replaceChildren();
+
+      if (!keyword) return;
+
+      const matches = posts.filter(post =>
+        (post.title + ' ' + post.content)
+          .toLowerCase().includes(keyword)
+      );
+
+      if (matches.length === 0) {
+        message('該当する記事はありません。');
+        return;
+      }
+
+      const count = document.createElement('p');
+      count.textContent = matches.length + '件見つかりました';
+      results.appendChild(count);
+
+      matches.forEach(post => {
+        const item = document.createElement('div');
+        item.className = 'search-result';
+
+        const link = document.createElement('a');
+        link.href = post.url;
+        link.textContent = post.title;
+
+        const date = document.createElement('p');
+        date.textContent = post.date;
+
+        const excerpt = document.createElement('p');
+        const plain = post.content.replace(/\s+/g, ' ');
+        const pos = plain.toLowerCase()
+          .indexOf(keyword);
+        const start = Math.max(0, pos - 35);
+        excerpt.textContent =
+          (start > 0 ? '…' : '') +
+          plain.slice(start, start + 110) +
+          (start + 110 < plain.length ? '…' : '');
+
+        item.append(link, date, excerpt);
+        results.appendChild(item);
+      });
+    }
+
+    input.addEventListener('input', search);
+    message('検索データを読み込み中……');
+
+    fetch(searchUrl)
+      .then(response => {
+        if (!response.ok) throw new Error('読み込み失敗');
+        return response.json();
+      })
+      .then(data => {
+        posts = data;
+        message('');
+        search();
+      })
+      .catch(() => {
+        message('検索データを読み込めませんでした。');
+      });
+  })();
+  </script>
+
 </body>
 </html>
