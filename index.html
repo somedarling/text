@@ -92,8 +92,6 @@ header h1 a:visited {
   text-decoration: none;
 }
 
-    
-
 .search-box {
   max-width: 400px;
   margin: 30px auto 10px;
@@ -124,7 +122,26 @@ header h1 a:visited {
   border-top: 1px dashed #626063;
   padding: 6px 0;
 }
+    
+.archive-nav {
+  max-width: 400px;
+  margin: 30px auto 20px;
+  padding: 15px 20px;
+  background: #f6e5cc;
+  border: 2px solid #626063;
+  border-radius: 5px;
+  text-align: center;
+}
 
+.archive-nav h2 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.archive-nav a {
+  display: inline-block;
+  margin: 3px 8px;
+}
     
   </style>
 </head>
@@ -163,6 +180,27 @@ header h1 a:visited {
   </nav>
   {% endif %}
 
+  <nav class="archive-nav" aria-label="過去ログ">
+    <h2>過去ログ</h2>
+
+    {% assign previous_month = "" %}
+    {% for post in site.posts %}
+      {% assign current_month = post.date | date: "%Y-%m" %}
+
+      {% if current_month != previous_month %}
+        {% assign year = post.date | date: "%Y" %}
+        {% assign month = post.date | date: "%m" %}
+        {% capture archive_path %}/archive/{{ year }}/{{ month }}/{% endcapture %}
+
+        <a href="{{ archive_path | relative_url }}">
+          {{ year }}年{{ month }}月
+        </a>
+
+        {% assign previous_month = current_month %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+  
     <section class="search-box" role="search">
     <label for="search-input">記事を検索</label>
     <input id="search-input"
