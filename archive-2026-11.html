@@ -1,0 +1,76 @@
+---
+layout: null
+permalink: /archive/2026/11/
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026年11月 - よもくれよもよも</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap">
+  <style>
+    body {
+      background: #a4d5bd;
+      color: #626063;
+      font-family: 'Kosugi Maru', sans-serif;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 0;
+      padding: 30px 15px;
+    }
+    header, article {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #f6e5cc;
+      border: 3px solid #626063;
+      border-radius: 5px;
+    }
+    header { text-align: center; }
+    h1 { font-size: 18px; }
+    h2 { font-size: 16px; }
+    h1, h2 {
+      line-height: 1.5;
+      margin: 0.5em 0 0.8em;
+    }
+    time { font-size: 11px; }
+    .body {
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+    .body p { margin: 0 0 1.2em; }
+    .body p:last-child { margin-bottom: 0; }
+    a { color: #65282E; }
+    a:visited { color: #8b5e4b; }
+    a:hover { color: #b47765; }
+    header h1 a, header h1 a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="{{ '/' | relative_url }}">よもくれよもよも</a></h1>
+    <p>2026年11月の過去ログ</p>
+  </header>
+
+  {% for post in site.posts %}
+    {% assign month = post.date | date: "%Y-%m" %}
+    {% if month == "2026-11" %}
+      <article>
+        <time>{{ post.date | date: "%Y.%m.%d %H:%M" }}</time>
+        <h2>{{ post.title | escape }}</h2>
+        <div class="body">
+          {{ post.content }}
+        </div>
+      </article>
+    {% endif %}
+  {% endfor %}
+
+  <p style="text-align:center">
+    <a href="{{ '/' | relative_url }}">トップページへ戻る</a>
+  </p>
+</body>
+</html>
