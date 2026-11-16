@@ -2,7 +2,7 @@ media: media
 
 content:
   - name: posts
-    label: 日記
+    label: 文章
     type: collection
     path: _posts
     format: yaml-frontmatter
